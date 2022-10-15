@@ -1,6 +1,8 @@
 {
     "private": true,
     "scripts": {
+        "init": "npm install; npm run watch",
+        "init-docker": "npm --prefix=/app install && npm run watch",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",

@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+    nginx:
+        image: nginx:latest
+        working_dir: /app
+        volumes:
+            - .:/app
+            - ./_docker/nginx/conf.d:/etc/nginx/conf.d/
+        ports:
+            - 8000:80
+        depends_on:
+            - app
+
+    app:
+        build:
+            context: .
+            dockerfile: ./_docker/app/Dockerfile
+        working_dir: /app
+        volumes:
+            - ./:/app
+        depends_on:
+            - db
+            - redis
+
+    node:
+        restart: always
+        image: node:14
+        working_dir: /app
+        user: '1000'
+        volumes:
+            - ./:/app
+        command: npm run init-docker
+
+    db:
+        image: mysql:8.0.30
+        restart: always
+        volumes:
+            - ./tmp/db:/var/lib/mysql
+        ports:
+            - 8101:3306
+        environment:
+            MYSQL_USER: saas_flow_user
+            MYSQL_PASSWORD: saas_flow_pass
+            MYSQL_DATABASE: saas_flow_database
+            MYSQL_ROOT_PASSWORD: rootAdmin
+        command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
+    redis:
+        image: redis
+        ports:
+            - 6378:6379
+        restart: unless-stopped
+        volumes:
+            - ./tmp/redis:/data
