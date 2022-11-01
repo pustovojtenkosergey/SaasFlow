@@ -40,6 +40,11 @@
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fortawesome/vue-fontawesome": "^3.0.1",
         "@kyvg/vue3-notification": "^2.4.1",
-        "moment": "^2.29.4"
+        "laravel-vue-pagination": "^3.0.0",
+        "moment": "^2.29.4",
+        "vue-json-component": "^0.4.1",
+        "vue-json-tree": "^0.4.3",
+        "vue-pdf": "^4.3.0",
+        "vue-pdf-embed": "^1.1.4"
     }
 }

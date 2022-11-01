@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AddressField;
+use App\Models\remove\AddressField;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     {
 //         \App\Models\User::factory(10)->create();
 
-        AddressField::factory(500)->create();
+        AddressField::factory(10)->create();
     }
 }

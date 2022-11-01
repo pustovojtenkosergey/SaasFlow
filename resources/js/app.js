@@ -1,17 +1,21 @@
-import Alerts from "./Components/Header/Alerts";
-import ParcelForm from "./Components/ParcelForm";
-import ParcelTabs from "./Components/ParcelTabs";
-import ParcelItem from "./Components/ParcelItem";
+import Alerts from "./components/Header/Alerts";
+import PackageForm from "./components/packages/PackageForm";
+import PackageTabs from "./components/packages/PackageTabs";
+import PackageItem from "./components/packages/PackageItem";
+import PackageFilters from "./components/packages/PackageFilters";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import Notifications from '@kyvg/vue3-notification'
 import { createApp } from "vue";
 import Alpine from 'alpinejs';
-import DateHelper from "./Mixins/DateHelper";
-import ParcelShow from "./Components/ParcelShow";
-import ParcelsList from "./Components/ParcelsList";
-import FlowList from "./Components/FlowList";
+import DateHelper from "./mixins/DateHelper";
+import PackageShow from "./components/packages/PackageShow";
+import PackagesList from "./components/packages/PackagesList";
+import PackagesListToGroupForm from "./components/packages/PackagesListToGroupForm";
+import FlowList from "./components/FlowList";
+import JsonTree from 'vue-json-tree'
+import VuePdfEmbed from 'vue-pdf-embed'
 
 
 require('./bootstrap');
@@ -30,18 +34,23 @@ const app = createApp({});
 
 library.add(fas);
 app.component('font-awesome-icon', FontAwesomeIcon);
+app.component('json-tree', JsonTree);
+app.component('vue-pdf-embed', VuePdfEmbed);
+
 
 app.use(Notifications);
 
 app.component('date-helper', DateHelper);
 
 app.component('component-flow-list', FlowList);
-app.component('component-parcels-list', ParcelsList);
-app.component('component-parcel-show', ParcelShow);
-app.component('component-parcel-form', ParcelForm);
-app.component('parcel-tabs', ParcelTabs);
+app.component('packages-list', PackagesList);
+app.component('package-show', PackageShow);
+app.component('package-form', PackageForm);
+app.component('package-tabs', PackageTabs);
+app.component('package-filters', PackageFilters);
+app.component('packages-list-to-group-form', PackagesListToGroupForm);
 
-app.component('parcel-item', ParcelItem);
+app.component('package-item', PackageItem);
 app.component('component-alerts', Alerts);
 
 app.mount('#app');

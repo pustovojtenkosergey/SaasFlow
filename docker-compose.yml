@@ -11,6 +11,9 @@ services:
             - 8000:80
         depends_on:
             - app
+        networks:
+            - alpine-net
+        container_name: saas_flow_nginx
 
     app:
         build:
@@ -22,6 +25,9 @@ services:
         depends_on:
             - db
             - redis
+        networks:
+            - alpine-net
+        container_name: saas_flow_app
 
     node:
         restart: always
@@ -31,6 +37,7 @@ services:
         volumes:
             - ./:/app
         command: npm run init-docker
+        container_name: saas_flow_node
 
     db:
         image: mysql:8.0.30
@@ -45,6 +52,9 @@ services:
             MYSQL_DATABASE: saas_flow_database
             MYSQL_ROOT_PASSWORD: rootAdmin
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+        networks:
+            - alpine-net
+        container_name: saas_flow_db
 
     redis:
         image: redis
@@ -53,3 +63,10 @@ services:
         restart: unless-stopped
         volumes:
             - ./tmp/redis:/data
+        networks:
+            - alpine-net
+        container_name: saas_flow_redis
+
+networks:
+    alpine-net:
+        driver: bridge

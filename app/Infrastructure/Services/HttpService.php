@@ -15,7 +15,7 @@ class HttpService
 
     public function __construct()
     {
-        $this->client = new Client(['verify' => false]);
+        $this->client = new Client();
         $this->headers = ['Content-type' => 'application/json'];
     }
 

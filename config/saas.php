@@ -3,10 +3,10 @@
 return [
 
     'default' => [
-        'host' => 'https://starlinks.dev:7890',
+        'host' => 'http://localhost:8085',
         'admin' => [
-            'username' => 'admin@starlinks.com',
-            'password' => '4M0o1OupdGOO',
+            'username' => 'admin@starlinks.loc',
+            'password' => 'qwerty123',
         ]
     ]
 ];

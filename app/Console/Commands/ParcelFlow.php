@@ -20,7 +20,7 @@ class ParcelFlow extends Command
      *
      * @var string
      */
-    protected $description = 'Create parcels';
+    protected $description = 'Create packages';
 
     /**
      * Create a new command instance.
@@ -38,7 +38,7 @@ class ParcelFlow extends Command
         $count = $this->input->getArgument('count');
         $country = $this->input->getArgument('country');
 
-        $this->info('Create ' . $count . ' parcels');
+        $this->info('Create ' . $count . ' packages');
 
 //        $this->output->progressStart($count);
         echo PHP_EOL;

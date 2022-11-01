@@ -41,4 +41,18 @@ class FlowStorage
         return $result;
     }
 
+    public static function setLocations(array $locations): void
+    {
+        Redis::set('last_locations', json_encode($locations));
+    }
+
+    public static function getLocations(): array
+    {
+        $locations = Redis::get('last_locations');
+        if (empty($locations))
+            return [];
+
+        return json_decode($locations, true);
+    }
+
 }

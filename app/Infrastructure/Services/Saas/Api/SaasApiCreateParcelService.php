@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Services\Saas\Api;
 
-use App\Infrastructure\Domain\DTO\ParcelDTO;
+use App\Infrastructure\Domain\DTO\PackageDto;
 use App\Infrastructure\Services\HttpService;
 use App\Infrastructure\Services\Saas\Api\Auth\SaasApiAuthorizationService;
-use App\Models\AddressField;
+use App\Models\remove\AddressField;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Log;
@@ -27,10 +27,10 @@ class SaasApiCreateParcelService
         $this->http->addHeaders(['Authorization' => 'Bearer '.$auth->getToken()]);
     }
 
-    public function execute(ParcelDTO $parcelDTO): array
+    public function execute(PackageDto $parcelDTO): array
     {
         try {
-            $result = $this->http->post(config('saas.default.host').'/api/v2/parcels', $parcelDTO->toArray());
+            $result = $this->http->post(config('saas.default.host').'/api/v2/packages', $parcelDTO->toArray());
         } catch (Exception $exception) {
             if ($exception instanceof ClientException) {
                 $errorResponse = json_decode($exception->getResponse()->getBody()->getContents(), true);
@@ -45,7 +45,7 @@ class SaasApiCreateParcelService
     {
         $tracker = '';
         try {
-            $result = $this->http->post(config('saas.default.host').'/api/v2/parcels', $this->getPostFields($country));
+            $result = $this->http->post(config('saas.default.host').'/api/v2/packages', $this->getPostFields($country));
 
             if (empty($result['last_mile_carrier_tracking_number'])) {
                 throw new Exception('Tracking number not found');
